@@ -5,13 +5,13 @@ import ClusterHelper from '../../components/ClusterHelper/ClusterHelper'
 import {Buffer} from 'buffer'
 
 const Homepage = () => {
-    const [securityToken, setSecurityToken] = useState('^^LOCAL-testing-123^^')
+    const [securityToken, setSecurityToken] = useState(`${process.env.REACT_APP_SECURITY_TOKEN}`)
     const [selectedNode, setSelectedNode] = useState()
-    const [wsEndpoint, setWsEndpoint] = useState('wss://19505-hoprnet-hoprnet-lgxangofxaz.ws-eu63.gitpod.io')
-    const [httpEndpoint, setHTTPEndpoint] = useState('https://13305-hoprnet-hoprnet-lgxangofxaz.ws-eu63.gitpod.io')
+    const [wsEndpoint, setWsEndpoint] = useState(`${process.env.REACT_APP_N5_WS}`)
+    const [httpEndpoint, setHTTPEndpoint] = useState(`${process.env.REACT_APP_N5_REST_API}`)
     const [messages, setMessages] = useState([])
     const [address, setAddress] = useState('')
-    const [isReferee, setIsReferee] = useState('16Uiu2HAmF5FBT7K4RY8MwfvpCdg162GeN7cMAVJzJZxRZtBNSMUq')
+    const [isReferee, setIsReferee] = useState(`${process.env.REACT_APP_N5_ADDRESS}`)
     const [referee, setReferee] = useState('')
 
     const getHeaders = (isPost = false) => {
