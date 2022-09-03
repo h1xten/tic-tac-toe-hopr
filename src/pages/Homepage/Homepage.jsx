@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import WebSocketHandler from '../../components/WebSocket/WebSocketHandler'
-import ClusterHelper from '../../components/ClusterHelper/ClusterHelper'
+import WebSocketHandler from '../../components/webSocket/WebSocketHandler'
+import ClusterHelper from '../../components/clusterHelper/ClusterHelper'
 
 import {Buffer} from 'buffer'
 
@@ -11,8 +11,8 @@ const Homepage = () => {
     const [httpEndpoint, setHTTPEndpoint] = useState(`${process.env.REACT_APP_N5_REST_API}`)
     const [messages, setMessages] = useState([])
     const [address, setAddress] = useState('')
-    const [isReferee, setIsReferee] = useState(`${process.env.REACT_APP_N5_ADDRESS}`)
-    const [referee, setReferee] = useState('')
+    const [isReferee, setIsReferee] = useState(true)
+    const [referee, setReferee] = useState(`${process.env.REACT_APP_N5_ADDRESS}`)
 
     const getHeaders = (isPost = false) => {
         const headers = new Headers()
@@ -56,10 +56,13 @@ const Homepage = () => {
 
   return (
     <div>
-        <ClusterHelper selectedNode={address} />
+        {/* <ClusterHelper selectedNode={address} /> */}
         <WebSocketHandler
             wsEndpoint={wsEndpoint}
             securityToken={securityToken}
+            multipleMessages = {isReferee}
+            messages={messages}
+            setMessages = {setMessages}
         />
     </div>
   )

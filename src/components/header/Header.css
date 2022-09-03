@@ -1,0 +1,25 @@
+.navbar {
+    position: relative;
+    display: flex;
+    user-select: none;
+    width: 100%;
+    align-items: center;
+    height: 4rem;
+    letter-spacing: 2.5px;
+    background-color: var(--second-bg);
+    color: var(--primary-color);
+    box-shadow: var(--dark-shadow); 
+}
+.navbar__content {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    width: 100%;
+}
+.settings__btn, .settings__btn:hover{
+    background-color: transparent !important;
+    border: 0 !important;
+}
+.modal__inp:not(:last-child){
+    margin-bottom: 1rem !important;
+}

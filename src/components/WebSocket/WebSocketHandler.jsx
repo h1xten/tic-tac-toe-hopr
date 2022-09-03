@@ -14,7 +14,7 @@ export const WebSocketHandler = ({
   const handleReceivedMessage = async (ev) => {
     try {
       const data = JSON.parse(ev.data)
-      console.log('WebSocket Data', data)
+
       if (data.type === 'message') {
         setMessage(data.msg)
         setMessages((prevArr) => [...prevArr, data.msg])
@@ -38,7 +38,7 @@ export const WebSocketHandler = ({
         { multipleMessages ? (
             <div>
                 {messages.map((message) => (
-                    <p>{message}</p>
+                    <p key={message}>{message}</p>
                 ))}
             </div>
         ) : (
