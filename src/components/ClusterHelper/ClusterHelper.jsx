@@ -23,8 +23,8 @@ export default function ClusterHelper({
       {[...Array(CLUSTER_NODES)].map((_, index) => (
         <button
           style={{
-            background: selectedNode == index + 1 && 'blue',
-            color: selectedNode == index + 1 && 'white'
+            background: selectedNode === index + 1 && 'blue',
+            color: selectedNode === index + 1 && 'white'
           }}
           onClick={() => {
             setSelectedNode(index + 1)

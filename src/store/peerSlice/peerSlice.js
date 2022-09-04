@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     status: null,
-    securityToken: '^^LOCAL-testing-123^^',
+    securityToken: null,
     opponent: {
         address: null,
     }
@@ -12,6 +12,9 @@ export const peerSlice = createSlice({
     name: 'peer',
     initialState,
     reducers: {
+        setHorpAddress: (state, action) => {
+            state.hoprAddress = action.payload
+        },
         setOpponent: (state, action) => {
             state.opponent.address = action.payload
         },
@@ -20,3 +23,4 @@ export const peerSlice = createSlice({
         }
     }
 })
+export const {setHorpAddress, setSecurityToken, setOpponent} = peerSlice.actions
