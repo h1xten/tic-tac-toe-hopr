@@ -8,7 +8,7 @@ export const peerApi = createApi({
         prepareHeaders: (headers, { getState }) => {
             const token = getState().peer.securityToken
             if(token){
-                headers.push('Authorization', 'Basic ' + Buffer.from(token).toString('base64'))
+                headers.append('Authorization', 'Basic ' + Buffer.from(token).toString('base64'))
             }
             return headers
         }
