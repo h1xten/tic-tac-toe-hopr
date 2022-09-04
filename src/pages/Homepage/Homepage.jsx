@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import WebSocketHandler from '../../components/webSocket/WebSocketHandler'
 import ClusterHelper from '../../components/clusterHelper/ClusterHelper'
 
 
 import Header from '../../components/header/Header'
-import { useGetPeerInfoQuery } from '../../store/peerSlice/peerApi'
+import {  useGetPeerInfoQuery } from '../../store/peerSlice/peerApi'
 
 const Homepage = () => {
     // const [wsEndpoint, setWsEndpoint] = useState(`${process.env.REACT_APP_N5_WS}`)
@@ -13,29 +13,6 @@ const Homepage = () => {
     // const [address, setAddress] = useState('')
     // const [isReferee, setIsReferee] = useState(true)
     // const [referee, setReferee] = useState(`${process.env.REACT_APP_N5_ADDRESS}`)
-
-    // const getHeaders = (isPost = false) => {
-    //     const headers = new Headers()
-    //     if (isPost) {
-    //       headers.set('Content-Type', 'application/json')
-    //       headers.set('Accept-Content', 'application/json')
-    //     }
-    //     headers.set('Authorization', 'Basic ' + Buffer.from(securityToken).toString('base64'))
-    //     return headers
-    //   }
-
-    // useEffect(() => {
-    //     const loadAddress = async () => {
-    //       const headers = getHeaders(securityToken)
-    //       const account = await fetch(`${httpEndpoint}/api/v2/account/addresses`, {
-    //         headers
-    //       })
-    //         .then((res) => res.json())
-    //         .catch((err) => console.error(err))
-    //       setAddress(account?.hopr)
-    //     }
-    //     loadAddress()
-    // }, [securityToken, httpEndpoint])
 
 
     // const sendMessage = async (recipient, body) => {
@@ -53,8 +30,10 @@ const Homepage = () => {
     //   const sendMove = async (move) => {
     //     await sendMessage(referee, `${address}-${move}`)
     //   }
-
-    const [isModalVisible, setIsModalVisible] = useState(false)
+    const [isSettingsModalVisible, setIsSettingsModalVisible] = useState(false)
+    const [isGameModalVisible, setIsGameModalVisible] = useState(false)
+    const [isConnectModalVisible, setIsConnectModalVisible] = useState(false)
+    const [clear, setClear] = useState(false)
     const [nodeApi, setNodeApi] = useState('')
     const [skipPeerInfo, setSkipPeerInfo] = useState(true)
     const [securityToken, setToken] = useState('')
@@ -67,17 +46,16 @@ const Homepage = () => {
         skip: skipPeerInfo,
     })
 
-
   return (
     <div>
         <Header 
-            isModalVisible={isModalVisible}
-            setIsModalVisible={setIsModalVisible}
-            nodeApi={nodeApi}
-            setNodeApi={setNodeApi}
+            isSettingsModalVisible={isSettingsModalVisible} setIsSettingsModalVisible={setIsSettingsModalVisible}
+            isGameModalVisible={isGameModalVisible} setIsGameModalVisible={setIsGameModalVisible}
+            isConnectModalVisible={isConnectModalVisible} setIsConnectModalVisible={setIsConnectModalVisible}
+            clear={clear} setClear={setClear}
+            nodeApi={nodeApi} setNodeApi={setNodeApi}
             setSkipPeerInfo={setSkipPeerInfo}
-            securityToken = {securityToken}
-            setToken = {setToken}
+            securityToken = {securityToken} setToken = {setToken}
             hoprAddress = {peer?.hoprAddress ? peer.hoprAddress : ''}
             peerError={peerError}
             peerSuccess={peerSuccess}

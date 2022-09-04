@@ -19,8 +19,18 @@ export const peerApi = createApi({
                 url: `${nodeApi}/api/v2/account/addresses`,
             }),
         }),
+        sendMessage: builder.mutation({
+            query: ({nodeApi, recipient, msg}) => ({
+                url: `${nodeApi}/api/v2/messages`,
+                method: 'POST',
+                data: JSON.stringify({
+                    recipient,
+                    msg
+                })
+            })
+        })
        
     })
 })
 
-export const {useGetPeerInfoQuery} = peerApi;
+export const {useGetPeerInfoQuery, useSendMessageMutation} = peerApi;

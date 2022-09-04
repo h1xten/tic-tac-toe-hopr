@@ -16,6 +16,14 @@
     align-items: center;
     width: 100%;
 }
+.navbar__settings{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navbar__settings>button:not(:last-child){
+    margin-right: 2rem !important;
+}
 .settings__btn, .settings__btn:hover{
     background-color: transparent !important;
     border: 0 !important;

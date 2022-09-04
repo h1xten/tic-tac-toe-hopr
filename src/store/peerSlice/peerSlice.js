@@ -12,7 +12,7 @@ export const peerSlice = createSlice({
     name: 'peer',
     initialState,
     reducers: {
-        setHorpAddress: (state, action) => {
+        setHoprAddress: (state, action) => {
             state.hoprAddress = action.payload
         },
         setOpponent: (state, action) => {
@@ -23,4 +23,4 @@ export const peerSlice = createSlice({
         }
     }
 })
-export const {setHorpAddress, setSecurityToken, setOpponent} = peerSlice.actions
+export const {setHoprAddress, setSecurityToken, setOpponent} = peerSlice.actions
