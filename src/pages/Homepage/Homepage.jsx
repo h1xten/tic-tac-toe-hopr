@@ -58,14 +58,13 @@ const Homepage = () => {
             peerError={peerError}
             peerSuccess={peerSuccess}
             peerLoading={peerLoading} />
-        {/* <ClusterHelper selectedNode={address} />
-        <WebSocketHandler
+        {/* <WebSocketHandler
             wsEndpoint={wsEndpoint}
             securityToken={securityToken}
             multipleMessages = {isReferee}
             messages={messages}
             setMessages = {setMessages}
-        />*/}
+        /> */}
     </div>
   )
 }

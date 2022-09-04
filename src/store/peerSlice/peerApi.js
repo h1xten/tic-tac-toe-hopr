@@ -8,7 +8,7 @@ export const peerApi = createApi({
         prepareHeaders: (headers, { getState }) => {
             const token = getState().peer.securityToken
             if(token){
-                headers.append('Authorization', 'Basic ' + Buffer.from(token).toString('base64'))
+                headers.set('Authorization', 'Basic ' + Buffer.from(token).toString('base64'))
             }
             return headers
         }
@@ -20,13 +20,17 @@ export const peerApi = createApi({
             }),
         }),
         sendMessage: builder.mutation({
-            query: ({nodeApi, recipient, msg}) => ({
-                url: `${nodeApi}/api/v2/messages`,
+            query: ({nodeApi, recipient, message}) => ({
+                url: `${nodeApi}/api/v2/messages/`,
                 method: 'POST',
-                data: JSON.stringify({
-                    recipient,
-                    msg
-                })
+                body: JSON.stringify({
+                    recipient: recipient,
+                    body: message
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Content': 'application/json',
+                },
             })
         })
        

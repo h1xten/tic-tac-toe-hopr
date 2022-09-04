@@ -55,7 +55,7 @@ const Header = ({
                     visible={isGameModalVisible}
                     onCancel={() => setIsGameModalVisible(false)}
                     footer={
-                        <Button key='submit' type='primary' onClick={() => sendMessage({nodeApi, opponent, msg: 'create'})}>Create</Button>
+                        <Button key='submit' type='primary' onClick={() => sendMessage({nodeApi, opponent, message: 'create'})}>Create</Button>
                     }
                 >
                     <label>Your HOPR Address</label>
