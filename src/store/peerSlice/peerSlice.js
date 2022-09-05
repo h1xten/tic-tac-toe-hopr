@@ -3,24 +3,33 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     status: null,
     securityToken: null,
+    randNumber: null,
     opponent: {
         address: null,
-    }
+        randNumber: null
+    },
+    error: null,
 }
 
 export const peerSlice = createSlice({
     name: 'peer',
     initialState,
     reducers: {
-        setHoprAddress: (state, action) => {
-            state.hoprAddress = action.payload
+        setMyStatus: (state, action) => {
+            state.status = action.payload
+        },
+        setSecurityToken: (state, action) => {
+            state.securityToken = action.payload
         },
         setOpponent: (state, action) => {
             state.opponent.address = action.payload
         },
-        setSecurityToken: (state, action) => {
-            state.securityToken = action.payload
+        setMyNumber: (state, action) => {
+            state.randNumber = action.payload
+        },
+        setOpponentNumber: (state, action) => {
+            state.opponent.randNumber = action.payload
         }
     }
 })
-export const {setHoprAddress, setSecurityToken, setOpponent} = peerSlice.actions
+export const {setMyStatus, setSecurityToken, setOpponent, setMyNumber, setOpponentNumber} = peerSlice.actions

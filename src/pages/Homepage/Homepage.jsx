@@ -1,40 +1,20 @@
 import React, { useState} from 'react'
-
-
+import WebSocketHandler from '../../components/webSocket/WebSocketHandler'
 import Header from '../../components/header/Header'
 import {  useGetPeerInfoQuery } from '../../store/peerSlice/peerApi'
+import GameLogic from '../../components/gameLogic/GameLogic'
 
 const Homepage = () => {
-    // const [wsEndpoint, setWsEndpoint] = useState(`${process.env.REACT_APP_N5_WS}`)
-    // const [httpEndpoint, setHTTPEndpoint] = useState(`${process.env.REACT_APP_N5_REST_API}`)
-    // const [messages, setMessages] = useState([])
-    // const [address, setAddress] = useState('')
-    // const [isReferee, setIsReferee] = useState(true)
-    // const [referee, setReferee] = useState(`${process.env.REACT_APP_N5_ADDRESS}`)
-
-
-    // const sendMessage = async (recipient, body) => {
-    //     if (!address) return
-    //     await fetch(`${httpEndpoint}/api/v2/messages`, {
-    //       method: 'POST',
-    //       headers: getHeaders(securityToken, true),
-    //       body: JSON.stringify({
-    //         recipient,
-    //         body
-    //       })
-    //     }).catch((err) => console.error(err))
-    //   }
     
-    //   const sendMove = async (move) => {
-    //     await sendMessage(referee, `${address}-${move}`)
-    //   }
     const [isSettingsModalVisible, setIsSettingsModalVisible] = useState(false)
     const [isGameModalVisible, setIsGameModalVisible] = useState(false)
     const [isConnectModalVisible, setIsConnectModalVisible] = useState(false)
     const [clear, setClear] = useState(false)
     const [nodeApi, setNodeApi] = useState('')
+    const [wsEndpoint, setWsEndpoint] = useState('')
     const [skipPeerInfo, setSkipPeerInfo] = useState(true)
     const [securityToken, setToken] = useState('')
+    const [messages, setMessages] = useState([])
 
     const { data: peer,
             isLoading: peerLoading,
@@ -52,19 +32,24 @@ const Homepage = () => {
             isConnectModalVisible={isConnectModalVisible} setIsConnectModalVisible={setIsConnectModalVisible}
             clear={clear} setClear={setClear}
             nodeApi={nodeApi} setNodeApi={setNodeApi}
+            wsEndpoint={wsEndpoint} setWsEndpoint={setWsEndpoint}
             setSkipPeerInfo={setSkipPeerInfo}
             securityToken = {securityToken} setToken = {setToken}
             hoprAddress = {peer?.hoprAddress ? peer.hoprAddress : ''}
             peerError={peerError}
             peerSuccess={peerSuccess}
-            peerLoading={peerLoading} />
-        {/* <WebSocketHandler
-            wsEndpoint={wsEndpoint}
-            securityToken={securityToken}
-            multipleMessages = {isReferee}
-            messages={messages}
-            setMessages = {setMessages}
-        /> */}
+            peerLoading={peerLoading}
+        />
+
+        <GameLogic nodeApi={nodeApi} messages={messages}/>
+
+        {securityToken && 
+            <WebSocketHandler 
+                wsEndpoint={`${wsEndpoint}/api/v2/messages/websocket`}
+                securityToken={securityToken}
+                setMessages={setMessages}
+            />
+        }
     </div>
   )
 }

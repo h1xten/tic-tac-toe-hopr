@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { Button, Input, Modal } from 'antd'
 import {SettingOutlined} from '@ant-design/icons'
 import './Header.css'
-import { setOpponent, setSecurityToken } from '../../store/peerSlice/peerSlice'
+import { setMyNumber, setMyStatus, setOpponent, setSecurityToken } from '../../store/peerSlice/peerSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { peerApi, useSendMessageMutation } from '../../store/peerSlice/peerApi'
+import { getRandom } from '../../utils/getRandom'
 
 const Header = ({
         isSettingsModalVisible, setIsSettingsModalVisible,
@@ -12,13 +13,14 @@ const Header = ({
         isConnectModalVisible, setIsConnectModalVisible,
         clear, setClear,
         nodeApi, setNodeApi,
+        wsEndpoint, setWsEndpoint,
         setSkipPeerInfo,
         securityToken, setToken,
         hoprAddress,
         peerError, peerSuccess, peerLoading,
     }) => {
         const dispatch = useDispatch()
-        const opponent = useSelector(state => state.peer?.opponent?.address)
+        const recipient = useSelector(state => state.peer?.opponent?.address)
 
         const handleSave = (securityToken) => {
             setClear(false)
@@ -30,13 +32,28 @@ const Header = ({
             setClear(true)
             dispatch(setSecurityToken(''))
             dispatch(setOpponent(''))
+            setWsEndpoint('')
             setSkipPeerInfo(true)
             setNodeApi('')
             setToken('')
             dispatch(peerApi.util.resetApiState())
         }
 
-        const [sendMessage, {isLoading: msgLoading, isError: msgError, error}] = useSendMessageMutation()
+        const [sendMessage, {isLoading: isMsgLoading, isError: isMsgError, error:msgErr}] = useSendMessageMutation()
+
+        const handleSendMessage = () => {
+            const randNumber = getRandom(500)
+            sendMessage({nodeApi, recipient, body:`invite-${randNumber}`})
+            dispatch(setMyStatus('invite'))
+            dispatch(setMyNumber(randNumber))
+        }
+
+        const handleConnect = () => {
+            const randNumber = getRandom(500)
+            sendMessage({nodeApi, recipient, body:`connected-${randNumber}`})
+            dispatch(setMyStatus('connected'))
+            dispatch(setMyNumber(randNumber))
+        }
 
   return (
     <div className='navbar'>
@@ -55,7 +72,10 @@ const Header = ({
                     visible={isGameModalVisible}
                     onCancel={() => setIsGameModalVisible(false)}
                     footer={
-                        <Button key='submit' type='primary' onClick={() => sendMessage({nodeApi, opponent, message: 'create'})}>Create</Button>
+                        <Button key='submit' type='primary' onClick={() => 
+                            handleSendMessage(hoprAddress)}>
+                            Create Game
+                        </Button>
                     }
                 >
                     <label>Your HOPR Address</label>
@@ -69,7 +89,7 @@ const Header = ({
                         className='modal__inp'
                         size='middle'
                         placeholder='Opponent address'
-                        value={opponent}
+                        value={recipient}
                         onChange={(e) => dispatch(setOpponent(e.target.value)) }
                     />
                 </Modal>
@@ -84,14 +104,19 @@ const Header = ({
                     title='Connect to the Game'
                     visible={isConnectModalVisible}
                     onCancel={() => setIsConnectModalVisible(false)}
-                    footer={null}
+                    footer={
+                        <Button key='submit' type='primary' onClick={() => 
+                            handleConnect(hoprAddress)}>
+                            Connect to the Game
+                        </Button>
+                    }
                 >
                     <label>Opponent HOPR Address</label>
                     <Input 
                         className='modal__inp'
                         size='middle'
                         placeholder='Opponent address'
-                        value={opponent}
+                        value={recipient}
                         onChange={(e) => dispatch(setOpponent(e.target.value)) }
                     />
                 </Modal>
@@ -119,6 +144,13 @@ const Header = ({
                         size='middle'
                         value={nodeApi}
                         onChange={(e)=> setNodeApi(e.target.value)}
+                    />
+                    <label>WS Endpoint</label>
+                    <Input 
+                        className='modal__inp'
+                        size='middle'
+                        value={wsEndpoint}
+                        onChange={(e)=> setWsEndpoint(e.target.value)}
                     />
                     <label>Security Token</label>
                     <Input 

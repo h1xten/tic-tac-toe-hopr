@@ -1,0 +1,22 @@
+.game {
+    padding-top: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.field{
+    text-align: center;
+}
+.board{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    align-items: center;
+    max-width: 18rem;
+    
+}
+.square{
+    height: 6rem;
+    width: 6rem;
+}

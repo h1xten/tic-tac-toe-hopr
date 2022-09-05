@@ -20,12 +20,12 @@ export const peerApi = createApi({
             }),
         }),
         sendMessage: builder.mutation({
-            query: ({nodeApi, recipient, message}) => ({
-                url: `${nodeApi}/api/v2/messages/`,
+            query: ({nodeApi, recipient, body}) => ({
+                url: `${nodeApi}/api/v2/messages`,
                 method: 'POST',
                 body: JSON.stringify({
-                    recipient: recipient,
-                    body: message
+                    'body': body,
+                    'recipient': recipient
                 }),
                 headers: {
                     'Content-Type': 'application/json',

@@ -1,11 +1,13 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
+import { gameSlice } from './gameSlice/gameSlice';
 import { peerApi } from './peerSlice/peerApi';
 import { peerSlice } from './peerSlice/peerSlice';
 
 const rootReducer = combineReducers({
     [peerApi.reducerPath]: peerApi.reducer,
     [peerSlice.name]: peerSlice.reducer,
+    [gameSlice.name]: gameSlice.reducer,
 })
 
 export const store = configureStore({

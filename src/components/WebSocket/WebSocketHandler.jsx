@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import useWebsocket from './useWebSocket'
+import { getRandom } from '../../utils/getRandom'
 
 export const WebSocketHandler = ({ 
         wsEndpoint,
         securityToken,
-        multipleMessages = false,
-        messages = [],
-        setMessages = () => {}
+        setMessages,
     }) => {
   const [message, setMessage] = useState('')
   const websocket = useWebsocket({ wsEndpoint, securityToken })
@@ -33,19 +32,10 @@ export const WebSocketHandler = ({
     }
   }, [socketRef.current])
 
+
+
   return (
     <>
-        { multipleMessages ? (
-            <div>
-                {messages.map((message) => (
-                    <p key={message}>{message}</p>
-                ))}
-            </div>
-        ) : (
-            <span>
-                {message ? message : 'You have no messages.'}
-            </span>)
-        }
     </>
     )
 }
