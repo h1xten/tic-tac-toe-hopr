@@ -1,4 +1,4 @@
-import { Button } from 'antd'
+import { message } from 'antd'
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { gameTurn } from '../../../store/gameSlice/gameSlice'
@@ -8,11 +8,10 @@ import Square from '../square/Square'
 
 const Board = ({gameMove, nodeApi, recipient}) => {
     const dispatch = useDispatch()
+
     const whichTurn = useSelector(state => state?.game?.turn)
     const side = useSelector(state => state?.game?.side)
-
     const [board, setBoard] = useState(Array(9).fill(''))
-    // const [turn, setTurn] = useState('X')
     const winner = calculateWinner(board)
 
     const [sendMessage] = useSendMessageMutation()
@@ -34,20 +33,32 @@ const Board = ({gameMove, nodeApi, recipient}) => {
         newBoard.splice(index, 1, side)
         setBoard(newBoard)
     }
-
-    const handleRestart = () => {
-        setBoard(Array(9).fill(''))
+    
+    const winnerMessage = (winner) => {
+        message.success({
+            content: `Player ${winner} Won!`,
+            duration: '2',
+            className: 'winner__message',
+            style: {
+                marginTop: '20vh',
+            }
+        })
     }
+
+    // const handleRestart = () => {
+    //     setBoard(Array(9).fill(''))
+    // }
 
   return (
     <div className='field'>
-        {winner && <h1>Winner is {winner}</h1>}
+        {/* {winner && winnerMessage(winner)} */}
         <div className='board'>
             {board.map((value, index) => (
                 <Square key={index} index={index} value={value} handleClick={handleClick} />
             ))}
         </div>
-        <Button type='primary' onClick={handleRestart}>Restart</Button>
+        {winner && <p>Winner is {winner}</p>}
+        {/* <Button type='primary' onClick={handleRestart}>Restart</Button> */}
     </div>
   )
 }

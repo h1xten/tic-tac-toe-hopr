@@ -16,12 +16,17 @@ li {
 }
 body {
     margin: 0 !important;
+    background-image: radial-gradient(circle, #81cbef, #739aba, #5e6d84, #434550, #222222);;
+    color: var(--primary-color) !important;
     font-family: 'Quicksand', sans-serif !important;
     font-style: normal !important;
     font-size: 16px !important;
     font-weight: 600 !important;
     height: 100% !important;
     line-height: 1;
+}
+h2{
+    color: inherit !important;
 }
 
 main {
@@ -49,8 +54,8 @@ footer{
     --second-bg: rgb(34, 34, 34);
     --primary-color: rgb(249, 249, 249);
     --primary-blue: rgb(32, 138, 188);
-    --hover-color: #36c0df;
-    --dark-shadow: 0px 0px 12px 4px rgba(0, 4, 38, 0.3);
+    --hover-color: rgb(54, 192, 223);
+    --dark-shadow: 0px 10px 12px 4px rgba(15, 22, 32, 0.5);
 }
 
 ::-webkit-scrollbar {

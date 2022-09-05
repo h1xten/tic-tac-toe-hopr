@@ -42,7 +42,7 @@ const useWebsocket = (settings) => {
     if (typeof window === 'undefined') return
 
     if (socketRef.current) {
-      console.info('WS Disconnecting..')
+      console.info('WS Disconnecting...')
       socketRef.current.close(1000, 'Shutting down')
     }
 
@@ -52,7 +52,7 @@ const useWebsocket = (settings) => {
       if (settings.securityToken) {
         wsUrl.search = `?apiToken=${settings.securityToken}`
       }
-      console.info('WS Connecting..')
+      console.info('WS Connecting...')
       socketRef.current = new WebSocket(wsUrl)
 
       socketRef.current.addEventListener('open', handleOpenEvent)

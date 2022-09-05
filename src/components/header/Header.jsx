@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Input, Modal } from 'antd'
 import {SettingOutlined} from '@ant-design/icons'
 import './Header.css'
+import HoprIcon from '../../assets/hopr_icon.png'
 import { setMyNumber, setMyStatus, setOpponent, setSecurityToken } from '../../store/peerSlice/peerSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { peerApi, useSendMessageMutation } from '../../store/peerSlice/peerApi'
@@ -58,7 +59,7 @@ const Header = ({
   return (
     <div className='navbar'>
         <div className='navbar__content wrapper'>
-            <div className='navbar__logo'>Tic-Tac-Toe</div>
+            <div className='navbar__logo'><img className='hopr_icon' src={HoprIcon} alt="logo" />Tic-Tac-Toe</div>
             <div className='navbar__settings'>
                 {/* Create Game */}
                 <Button 

@@ -5,6 +5,7 @@ import { setOpponentNumber } from '../../store/peerSlice/peerSlice'
 import Board from '../game/board/Board'
 import {SettingOutlined} from '@ant-design/icons'
 import './GameLogic.css'
+import GameInfo from '../game/gameInfo/GameInfo'
 
 const GameLogic = ({ nodeApi, messages}) => {
     const dispatch = useDispatch()
@@ -38,14 +39,16 @@ const GameLogic = ({ nodeApi, messages}) => {
     }
 
     return(
-        <>
+        <div className='main'>
         { gamestatus === 'playing' ?
-            <div className='game wrapper'> 
+            <div className='game wrapper'>
+                <GameInfo />
                 <Board gameMove={gameMove} nodeApi={nodeApi} recipient={recipient} />
+                <div className='game__info'></div>
             </div>
             :
             <div className='game wrapper'>
-                <div>
+                <div className='hello__player'>
                     <p>1) Set Your Node Settings in <SettingOutlined style={{fontSize: '16px'}}/> </p>
                     <p>2) Create Game or Connect to the Game by entering an opponent's address </p>
                     <p>3) The side for which you will play (X or O) is chosen randomly.<br/>
@@ -56,7 +59,7 @@ const GameLogic = ({ nodeApi, messages}) => {
                 </div>
             </div>
         }
-        </>
+        </div>
     )
 }
 
