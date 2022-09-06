@@ -1,4 +1,4 @@
-# Tic-Tac-Toe dApp built on HOPR.
+# Tic-Tac-Toe dApp using HOPR.
 
 ## Development
 Developed with 
