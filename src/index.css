@@ -16,7 +16,8 @@ li {
 }
 body {
     margin: 0 !important;
-    background-image: radial-gradient(circle, #81cbef, #739aba, #5e6d84, #434550, #222222);;
+    background-image: radial-gradient(circle, #81cbef, #739aba, #5e6d84, #434550, #222222);
+    background-repeat: no-repeat;
     color: var(--primary-color) !important;
     font-family: 'Quicksand', sans-serif !important;
     font-style: normal !important;
