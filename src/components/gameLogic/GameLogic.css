@@ -6,6 +6,7 @@
     border-radius: 25px;
 }
 .hello__player>h2{
+    color: #fff;
     margin: 0;
 }
 .game {
