@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { gameStatus, gameTurn, setSide } from '../../store/gameSlice/gameSlice'
 import { setOpponentNumber } from '../../store/peerSlice/peerSlice'
@@ -14,6 +14,8 @@ const GameLogic = ({ nodeApi, messages}) => {
     const gamestatus = useSelector(state => state?.game?.status)
     const myNumber = useSelector(state => state?.peer?.randNumber)
     const recipient = useSelector(state => state?.peer?.opponent?.address)
+    const mySide = useSelector(state => state?.game?.side)
+    const [winner, setWinner] = useState('')
 
     let gameMove = {}
     
@@ -43,8 +45,22 @@ const GameLogic = ({ nodeApi, messages}) => {
         { gamestatus === 'playing' ?
             <div className='game wrapper'>
                 <GameInfo />
-                <Board gameMove={gameMove} nodeApi={nodeApi} recipient={recipient} />
-                <div className='game__info'></div>
+                <Board gameMove={gameMove} nodeApi={nodeApi} recipient={recipient} setWinner={setWinner} />
+                <div className='game__info game__result'>
+                        {winner && winner === mySide ?
+                            <>
+                                <h2 className='win__text'>Congratulations! <br/> You won.</h2>
+                                <h3>The winner is {winner}</h3>
+                            </>
+                            : winner && winner !== mySide ?
+                            <>
+                                <h2 className='lose__text'>You Lost :(</h2>
+                                <h3>The winner is {winner}</h3>
+                            </>
+                            :
+                            ''
+                        }
+                </div>
             </div>
             :
             <div className='game wrapper'>

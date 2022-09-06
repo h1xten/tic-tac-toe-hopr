@@ -25,9 +25,9 @@ body {
     height: 100% !important;
     line-height: 1;
 }
-h2{
+/* h2{
     color: inherit !important;
-}
+} */
 
 main {
     flex: 1 0 auto;

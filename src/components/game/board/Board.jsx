@@ -6,7 +6,7 @@ import { useSendMessageMutation } from '../../../store/peerSlice/peerApi'
 import { calculateWinner } from '../../../utils/calculateWinner'
 import Square from '../square/Square'
 
-const Board = ({gameMove, nodeApi, recipient}) => {
+const Board = ({gameMove, nodeApi, recipient, setWinner}) => {
     const dispatch = useDispatch()
 
     const whichTurn = useSelector(state => state?.game?.turn)
@@ -17,13 +17,16 @@ const Board = ({gameMove, nodeApi, recipient}) => {
     const [sendMessage] = useSendMessageMutation()
 
     useEffect(()=>{
+        if(winner) {
+            setWinner(winner)
+        }
         if(whichTurn === 'you') {
             const copyBoard = [...board]
             copyBoard.splice(gameMove.index, 1, gameMove.value)
             setBoard(copyBoard)
             dispatch(gameTurn('turn'))
         }
-    }, [whichTurn])
+    }, [whichTurn, winner])
 
     const handleClick = (index) => {
         if(index < 0 || index > 9 || board[index] || winner || whichTurn === 'opponent') return
@@ -33,17 +36,6 @@ const Board = ({gameMove, nodeApi, recipient}) => {
         newBoard.splice(index, 1, side)
         setBoard(newBoard)
     }
-    
-    const winnerMessage = (winner) => {
-        message.success({
-            content: `Player ${winner} Won!`,
-            duration: '2',
-            className: 'winner__message',
-            style: {
-                marginTop: '20vh',
-            }
-        })
-    }
 
     // const handleRestart = () => {
     //     setBoard(Array(9).fill(''))
@@ -51,13 +43,11 @@ const Board = ({gameMove, nodeApi, recipient}) => {
 
   return (
     <div className='field'>
-        {/* {winner && winnerMessage(winner)} */}
         <div className='board'>
             {board.map((value, index) => (
                 <Square key={index} index={index} value={value} handleClick={handleClick} />
             ))}
         </div>
-        {winner && <p>Winner is {winner}</p>}
         {/* <Button type='primary' onClick={handleRestart}>Restart</Button> */}
     </div>
   )

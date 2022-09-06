@@ -23,6 +23,9 @@
     width: 30%;
     height: 21.6rem;
 }
+.game__result {
+    text-align: center;
+}
 .game__info>h2{
     color: inherit;
     font-size: 28px;
@@ -30,6 +33,30 @@
 .game__info>h3{
     color: inherit;
     font-size: 20px;
+}
+.win__text {
+    color: #fff;
+    text-shadow:
+        0 0 7px #fff,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px #0fa,
+        0 0 82px #0fa,
+        0 0 92px #0fa,
+        0 0 102px #0fa,
+        0 0 151px #0fa;
+}
+.lose__text{
+    color: #fff;
+    text-shadow:
+        0 0 7px #fff,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px #ff0000,
+        0 0 82px #ff0000,
+        0 0 92px #ff0000,
+        0 0 102px #ff0000,
+        0 0 151px #ff0000;
 }
 .field{
     margin: 0 auto;
