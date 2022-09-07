@@ -7,7 +7,7 @@
     height: 4rem;
     letter-spacing: 2.5px;
     background-color: var(--second-bg);
-    color: var(--primary-color);
+    color: var(--hover-color);
     box-shadow: var(--dark-shadow); 
 }
 .navbar__content {

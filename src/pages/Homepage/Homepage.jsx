@@ -25,7 +25,7 @@ const Homepage = () => {
     })
 
   return (
-    <div>
+    <div className='tic-tac-toe'>
         <Header 
             isSettingsModalVisible={isSettingsModalVisible} setIsSettingsModalVisible={setIsSettingsModalVisible}
             isGameModalVisible={isGameModalVisible} setIsGameModalVisible={setIsGameModalVisible}

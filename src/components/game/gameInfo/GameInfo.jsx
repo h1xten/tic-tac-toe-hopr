@@ -6,7 +6,7 @@ const GameInfo = () => {
     const turn = useSelector(state => state?.game?.turn)
   return (
     <div className='game__info'>
-        <h2>Game Info</h2>
+        <h2 style={{color: 'var(--second-bg)'}}>Game Info</h2>
         <h3>Player Turn: {turn === 'you' ? 'You' : turn === 'turn' ? 'You' : 'Opponent'}</h3>
         <h3>Your Side: {side}</h3>
     </div>

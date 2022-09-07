@@ -1,5 +1,5 @@
 .hello__player{
-    margin-top: 2rem;
+    margin: 0px auto;
     padding: 2rem 4rem;
     background-color: var(--second-bg);
     font-size: 18px;
@@ -10,8 +10,8 @@
     margin: 0;
 }
 .game {
-    padding-top: 6rem;
-    padding-bottom: 4rem;
+    /* padding-top: 6rem;
+    padding-bottom: 4rem; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,15 +32,15 @@
     font-size: 28px;
 }
 .game__info>h3{
-    color: inherit;
+    color: var(--second-bg);
     font-size: 20px;
 }
 .win__text {
     color: #fff;
     text-shadow:
-        0 0 7px #fff,
-        0 0 10px #fff,
-        0 0 21px #fff,
+        0 0 7px var(--second-bg),
+        0 0 10px var(--second-bg),
+        0 0 21px var(--second-bg),
         0 0 42px #0fa,
         0 0 82px #0fa,
         0 0 92px #0fa,
@@ -50,9 +50,9 @@
 .lose__text{
     color: #fff;
     text-shadow:
-        0 0 7px #fff,
-        0 0 10px #fff,
-        0 0 21px #fff,
+        0 0 7px var(--second-bg),
+        0 0 10px var(--second-bg),
+        0 0 21px var(--second-bg),
         0 0 42px #ff0000,
         0 0 82px #ff0000,
         0 0 92px #ff0000,

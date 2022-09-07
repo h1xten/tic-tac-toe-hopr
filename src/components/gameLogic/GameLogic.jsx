@@ -49,7 +49,7 @@ const GameLogic = ({ nodeApi, messages}) => {
                 <div className='game__info game__result'>
                         {winner && winner === mySide ?
                             <>
-                                <h2 className='win__text'>Congratulations! <br/> You won.</h2>
+                                <h2 className='win__text'>Congratulations! <br/> You won</h2>
                                 <h3>The winner is {winner}</h3>
                             </>
                             : winner && winner !== mySide ?

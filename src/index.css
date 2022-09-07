@@ -6,6 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
 html {
     height: 100%;
+    width: 100%;
 }
 a{
     text-decoration: none !important;
@@ -16,8 +17,8 @@ li {
 }
 body {
     margin: 0 !important;
-    background-image: radial-gradient(circle, #81cbef, #739aba, #5e6d84, #434550, #222222);
-    background-repeat: no-repeat;
+    /* background-image: radial-gradient(circle, #ffffa0, #eded8c, #dbda79, #c9c966, #b7b753);
+    background-repeat: no-repeat; */
     color: var(--primary-color) !important;
     font-family: 'Quicksand', sans-serif !important;
     font-style: normal !important;
@@ -44,10 +45,17 @@ footer{
     flex-direction: column;
     height: 100%;
 }
+.main{
+    display: flex;
+    min-height: calc(100vh - 4rem);
+    background-image: radial-gradient(circle, #ffffa0, #eded8c, #dbda79, #c9c966, #b7b753);
+    background-repeat: no-repeat;
+}
 .wrapper {
     max-width: 1240px;
     margin: 0px auto;
     padding: 0px 50px;
+    overflow: hidden;
     box-sizing: content-box;
 }
 :root{
