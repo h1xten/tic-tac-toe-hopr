@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import useWebsocket from './useWebSocket'
-import { getRandom } from '../../utils/getRandom'
+import {decode} from 'rlp'
 
 export const WebSocketHandler = ({ 
         wsEndpoint,
@@ -10,14 +10,22 @@ export const WebSocketHandler = ({
   const [message, setMessage] = useState('')
   const websocket = useWebsocket({ wsEndpoint, securityToken })
   const { socketRef } = websocket
+
+  const decodeMessage =  (msg) => {
+    let uint8Array = new Uint8Array(JSON.parse(`[${msg}]`));    
+    let decodedArray = decode(uint8Array)
+    
+    if (decodedArray[0] instanceof Uint8Array) {
+      return new TextDecoder().decode(decodedArray[0])
+    }
+    throw Error(`Could not decode received message: ${msg}`)
+  }
+
   const handleReceivedMessage = async (ev) => {
     try {
-      const data = JSON.parse(ev.data)
-
-      if (data.type === 'message') {
-        setMessage(data.msg)
-        setMessages((prevArr) => [...prevArr, data.msg])
-      }
+        const data = decodeMessage(ev.data)
+        setMessage(data)
+        setMessages((prevArr) => [...prevArr, data])
     } catch (err) {
       console.error(err)
     }

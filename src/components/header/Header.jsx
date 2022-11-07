@@ -8,13 +8,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { peerApi, useSendMessageMutation } from '../../store/peerSlice/peerApi'
 import { getRandom } from '../../utils/getRandom'
 
+
 const Header = ({
         isSettingsModalVisible, setIsSettingsModalVisible,
         isGameModalVisible, setIsGameModalVisible,
         isConnectModalVisible, setIsConnectModalVisible,
         clear, setClear,
         nodeApi, setNodeApi,
-        wsEndpoint, setWsEndpoint,
         setSkipPeerInfo,
         securityToken, setToken,
         hoprAddress,
@@ -33,14 +33,13 @@ const Header = ({
             setClear(true)
             dispatch(setSecurityToken(''))
             dispatch(setOpponent(''))
-            setWsEndpoint('')
             setSkipPeerInfo(true)
             setNodeApi('')
             setToken('')
             dispatch(peerApi.util.resetApiState())
         }
 
-        const [sendMessage, {isLoading: isMsgLoading, isError: isMsgError, error:msgErr}] = useSendMessageMutation()
+        const [sendMessage] = useSendMessageMutation()
 
         const handleSendMessage = () => {
             const randNumber = getRandom(500)
@@ -144,21 +143,18 @@ const Header = ({
                         className='modal__inp'
                         size='middle'
                         value={nodeApi}
-                        onChange={(e)=> setNodeApi(e.target.value)}
-                    />
-                    <label>WS Endpoint</label>
-                    <Input 
-                        className='modal__inp'
-                        size='middle'
-                        value={wsEndpoint}
-                        onChange={(e)=> setWsEndpoint(e.target.value)}
+                        onChange={(e)=> {
+                            setNodeApi(e.target.value)
+                        }}
                     />
                     <label>Security Token</label>
                     <Input 
                         className='modal__inp'
                         size='middle'
                         value={securityToken}
-                        onChange={(e) => setToken(e.target.value)}
+                        onChange={(e) => {
+                            setToken(e.target.value)
+                        }}
                     />
                     <label>HOPR Address</label>
                     <Input 

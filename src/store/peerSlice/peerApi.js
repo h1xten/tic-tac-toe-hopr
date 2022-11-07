@@ -24,8 +24,8 @@ export const peerApi = createApi({
                 url: `${nodeApi}/api/v2/messages`,
                 method: 'POST',
                 body: JSON.stringify({
-                    'body': body,
-                    'recipient': recipient
+                    body,
+                    recipient
                 }),
                 headers: {
                     'Content-Type': 'application/json',

@@ -11,7 +11,6 @@ const Homepage = () => {
     const [isConnectModalVisible, setIsConnectModalVisible] = useState(false)
     const [clear, setClear] = useState(false)
     const [nodeApi, setNodeApi] = useState('')
-    const [wsEndpoint, setWsEndpoint] = useState('')
     const [skipPeerInfo, setSkipPeerInfo] = useState(true)
     const [securityToken, setToken] = useState('')
     const [messages, setMessages] = useState([])
@@ -32,7 +31,6 @@ const Homepage = () => {
             isConnectModalVisible={isConnectModalVisible} setIsConnectModalVisible={setIsConnectModalVisible}
             clear={clear} setClear={setClear}
             nodeApi={nodeApi} setNodeApi={setNodeApi}
-            wsEndpoint={wsEndpoint} setWsEndpoint={setWsEndpoint}
             setSkipPeerInfo={setSkipPeerInfo}
             securityToken = {securityToken} setToken = {setToken}
             hoprAddress = {peer?.hoprAddress ? peer.hoprAddress : ''}
@@ -45,7 +43,7 @@ const Homepage = () => {
 
         {securityToken && 
             <WebSocketHandler 
-                wsEndpoint={`${wsEndpoint}/api/v2/messages/websocket`}
+                wsEndpoint={`${nodeApi}/api/v2/messages/websocket`}
                 securityToken={securityToken}
                 setMessages={setMessages}
             />
