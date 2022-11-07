@@ -5,7 +5,7 @@ const initialState = {
     status: null,
     hoprAddress: null,
     nodeApi: 'http://localhost:13301',
-    securityToken: '^^LOCAL-testing-123^^',
+    securityToken: null,
     randNumber: null,
     opponent: {
         address: null,
@@ -43,5 +43,5 @@ export const peerSlice = createSlice({
 })
 export const {setMyStatus, setHoprAddress, setNodeApi, setSecurityToken, setOpponent, setMyNumber, setOpponentNumber} = peerSlice.actions
 
-export const selectSecurityToken = (state) => state.router.location ? (getParam(state.router.location, 'apiToken') || '') : state.peer.securityToken
+export const selectSecurityToken = (state) => (getParam(state.router.location, 'apiToken')) ? (getParam(state.router.location, 'apiToken')) : state.peer.securityToken
 export const selectNodeApi = (state) => state.router.location ? (getParam(state.router.location, 'apiEndpoint') || '') : state.peer.nodeApi

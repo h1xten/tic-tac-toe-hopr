@@ -164,7 +164,6 @@ const Header = ({
                         className='modal__inp' 
                         size='middle' 
                         placeholder={peerLoading ? 'Loading...' : peerError ? 'Error!' : 'Your HOPR Address'} 
-                        disabled={clear? true : hoprAddress ? false : true}
                         value={clear? '' : peerError? '' : hoprAddress ? hoprAddress : ''}
                     />
                 </Modal>

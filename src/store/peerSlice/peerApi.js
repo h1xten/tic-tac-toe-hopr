@@ -7,7 +7,7 @@ export const peerApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://',
         prepareHeaders: (headers, { getState }) => {
-            const token = getState().router.location ? (getParam(getState().router.location, 'apiToken')) : getState().peer.securityToken
+            const token = (getParam(getState().router.location, 'apiToken')) ? (getParam(getState().router.location, 'apiToken')) : getState().peer.securityToken
             if(token){
                 headers.set('Authorization', 'Basic ' + Buffer.from(token).toString('base64'))
             }

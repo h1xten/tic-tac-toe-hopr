@@ -27,7 +27,7 @@ const Homepage = () => {
         isError: peerError,
         isSuccess: peerSuccess,
         error 
-    } = useGetPeerInfoQuery({nodeApi})
+    } = useGetPeerInfoQuery({nodeApi}, {skip: skipPeerInfo})
 
     useEffect(() => {
         if (!location) return
@@ -37,7 +37,9 @@ const Homepage = () => {
         if (!getParam(newLocation, 'apiEndpoint')) {
           newLocation.search = setParam(newLocation, 'apiEndpoint', 'http://localhost:13301')
         }
-    
+        if(getParam(newLocation, 'apiToken')){
+            setSkipPeerInfo(false)
+        }
         if (newLocation.search !== location.search) {
           dispatch(push(newLocation.pathname + newLocation.search))
         }
@@ -64,7 +66,7 @@ const Homepage = () => {
 
         <GameLogic nodeApi={nodeApi} messages={messages}/>
 
-        {securityToken && 
+        {(securityToken && nodeApi) && 
             <WebSocketHandler 
                 wsEndpoint={`${nodeApi}/api/v2/messages/websocket`}
                 securityToken={securityToken}
