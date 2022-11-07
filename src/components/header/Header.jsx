@@ -1,12 +1,14 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Button, Input, Modal } from 'antd'
 import {SettingOutlined} from '@ant-design/icons'
 import './Header.css'
 import HoprIcon from '../../assets/hopr_icon.png'
-import { setMyNumber, setMyStatus, setOpponent, setSecurityToken } from '../../store/peerSlice/peerSlice'
+import { setMyNumber, setMyStatus, setNodeApi, setOpponent, setSecurityToken } from '../../store/peerSlice/peerSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { peerApi, useSendMessageMutation } from '../../store/peerSlice/peerApi'
 import { getRandom } from '../../utils/getRandom'
+import {getParam, setParam} from '../../utils/urlParams'
+import { push } from 'redux-first-history'
 
 
 const Header = ({
@@ -14,14 +16,16 @@ const Header = ({
         isGameModalVisible, setIsGameModalVisible,
         isConnectModalVisible, setIsConnectModalVisible,
         clear, setClear,
-        nodeApi, setNodeApi,
+        nodeApi,
         setSkipPeerInfo,
-        securityToken, setToken,
+        securityToken,
         hoprAddress,
         peerError, peerSuccess, peerLoading,
     }) => {
         const dispatch = useDispatch()
         const recipient = useSelector(state => state.peer?.opponent?.address)
+
+        const location = useSelector(state => state.router.location)
 
         const handleSave = (securityToken) => {
             setClear(false)
@@ -34,8 +38,7 @@ const Header = ({
             dispatch(setSecurityToken(''))
             dispatch(setOpponent(''))
             setSkipPeerInfo(true)
-            setNodeApi('')
-            setToken('')
+            dispatch(setNodeApi(''))
             dispatch(peerApi.util.resetApiState())
         }
 
@@ -144,7 +147,7 @@ const Header = ({
                         size='middle'
                         value={nodeApi}
                         onChange={(e)=> {
-                            setNodeApi(e.target.value)
+                            location && dispatch(push(location.pathname + setParam(location, 'apiEndpoint', e.target.value)))
                         }}
                     />
                     <label>Security Token</label>
@@ -153,7 +156,7 @@ const Header = ({
                         size='middle'
                         value={securityToken}
                         onChange={(e) => {
-                            setToken(e.target.value)
+                            dispatch(setSecurityToken(e.target.value))
                         }}
                     />
                     <label>HOPR Address</label>

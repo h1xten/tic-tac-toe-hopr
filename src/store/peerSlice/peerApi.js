@@ -1,12 +1,13 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react"
 import { Buffer } from "buffer"
+import { getParam } from "../../utils/urlParams"
 
 export const peerApi = createApi({
     reducerPath: 'peerApi',
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://',
         prepareHeaders: (headers, { getState }) => {
-            const token = getState().peer.securityToken
+            const token = getState().router.location ? (getParam(getState().router.location, 'apiToken')) : getState().peer.securityToken
             if(token){
                 headers.set('Authorization', 'Basic ' + Buffer.from(token).toString('base64'))
             }

@@ -1,27 +1,50 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect} from 'react'
 import WebSocketHandler from '../../components/webSocket/WebSocketHandler'
 import Header from '../../components/header/Header'
 import {  useGetPeerInfoQuery } from '../../store/peerSlice/peerApi'
 import GameLogic from '../../components/gameLogic/GameLogic'
+import { useDispatch, useSelector } from 'react-redux'
+import { setParam, getParam } from '../../utils/urlParams'
+import { push } from 'redux-first-history'
+import { selectNodeApi, selectSecurityToken, setHoprAddress, setNodeApi, setSecurityToken } from '../../store/peerSlice/peerSlice'
 
 const Homepage = () => {
-    
+    const dispatch = useDispatch()
+
     const [isSettingsModalVisible, setIsSettingsModalVisible] = useState(false)
     const [isGameModalVisible, setIsGameModalVisible] = useState(false)
     const [isConnectModalVisible, setIsConnectModalVisible] = useState(false)
     const [clear, setClear] = useState(false)
-    const [nodeApi, setNodeApi] = useState('')
+    const location = useSelector(state => state.router.location)
+    const nodeApi = useSelector(selectNodeApi)
+    const securityToken = useSelector(selectSecurityToken)
     const [skipPeerInfo, setSkipPeerInfo] = useState(true)
-    const [securityToken, setToken] = useState('')
     const [messages, setMessages] = useState([])
 
-    const { data: peer,
-            isLoading: peerLoading,
-            isError: peerError,
-            isSuccess: peerSuccess,
-            error } = useGetPeerInfoQuery({nodeApi}, {
-        skip: skipPeerInfo,
-    })
+    const { 
+        data: peer,
+        isLoading: peerLoading,
+        isError: peerError,
+        isSuccess: peerSuccess,
+        error 
+    } = useGetPeerInfoQuery({nodeApi})
+
+    useEffect(() => {
+        if (!location) return
+    
+        const newLocation = { ...location }
+    
+        if (!getParam(newLocation, 'apiEndpoint')) {
+          newLocation.search = setParam(newLocation, 'apiEndpoint', 'http://localhost:13301')
+        }
+    
+        if (newLocation.search !== location.search) {
+          dispatch(push(newLocation.pathname + newLocation.search))
+        }
+        dispatch(setSecurityToken(securityToken))
+        dispatch(setNodeApi(nodeApi))
+    }, []);
+    
 
   return (
     <div className='tic-tac-toe'>
@@ -30,9 +53,9 @@ const Homepage = () => {
             isGameModalVisible={isGameModalVisible} setIsGameModalVisible={setIsGameModalVisible}
             isConnectModalVisible={isConnectModalVisible} setIsConnectModalVisible={setIsConnectModalVisible}
             clear={clear} setClear={setClear}
-            nodeApi={nodeApi} setNodeApi={setNodeApi}
+            nodeApi={nodeApi}
             setSkipPeerInfo={setSkipPeerInfo}
-            securityToken = {securityToken} setToken = {setToken}
+            securityToken = {securityToken}
             hoprAddress = {peer?.hoprAddress ? peer.hoprAddress : ''}
             peerError={peerError}
             peerSuccess={peerSuccess}
