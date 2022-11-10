@@ -38,10 +38,21 @@ export const peerSlice = createSlice({
         },
         setOpponentNumber: (state, action) => {
             state.opponent.randNumber = action.payload
+        },
+        setClearPeer: (state, action) => {
+            state.opponent.address = null
+            state.opponent.randNumber = null
+            state.randNumber = null
+            state.status = null
+        },
+        setSameOpponent: (state, action) => {
+            state.opponent.randNumber = null
+            state.randNumber = null
+            state.status = null
         }
     }
 })
-export const {setMyStatus, setHoprAddress, setNodeApi, setSecurityToken, setOpponent, setMyNumber, setOpponentNumber} = peerSlice.actions
+export const {setMyStatus, setHoprAddress, setNodeApi, setSecurityToken, setOpponent, setMyNumber, setOpponentNumber, setClearPeer, setSameOpponent} = peerSlice.actions
 
 export const selectSecurityToken = (state) => (getParam(state.router.location, 'apiToken')) ? (getParam(state.router.location, 'apiToken')) : state.peer.securityToken
 export const selectNodeApi = (state) => state.router.location ? (getParam(state.router.location, 'apiEndpoint') || '') : state.peer.nodeApi

@@ -36,6 +36,10 @@
     background-color: transparent !important;
     border: 0 !important;
 }
+.modal_footer{
+    display: flex;
+    justify-content: space-between;
+}
 .modal__inp:not(:last-child){
     margin-bottom: 1rem !important;
 }

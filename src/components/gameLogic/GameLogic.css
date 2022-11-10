@@ -18,6 +18,14 @@
     flex-wrap: wrap;
     width: 100%;
 }
+.gamestatus {
+    display: flex;
+    font-size: 18px;
+    color: var(--hover-color);
+}
+.gamestatus>p{
+    margin-left: 15px;
+}
 .game__info{
     color: var(--primary-color);
     letter-spacing: 2px;
@@ -59,7 +67,20 @@
         0 0 102px #ff0000,
         0 0 151px #ff0000;
 }
+.draw__text {
+    color: #fff;
+    text-shadow:
+        0 0 7px var(--second-bg),
+        0 0 10px var(--second-bg),
+        0 0 21px var(--second-bg),
+        0 0 42px #0fa,
+        0 0 82px #0fa,
+        0 0 92px #0fa,
+        0 0 102px #0fa,
+        0 0 151px #0fa;
+}
 .field{
+    position: relative;
     margin: 0 auto;
     text-align: center;
     justify-content: center;
@@ -71,6 +92,21 @@
     align-items: center;
     
 }
+.board_new_game {
+    position: absolute;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+}
+.new_btn{
+    width: 100%;
+}
+.new_btn:not(:last-child){
+    margin-bottom: 10px;
+}
 .square{
     cursor: pointer;
     border: 0;
@@ -81,4 +117,7 @@
     margin: 0.1rem;
     height: 7rem;
     width: 7rem;
+}
+.checked {
+    color: green !important;
 }

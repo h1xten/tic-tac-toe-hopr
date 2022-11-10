@@ -3,7 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     status: null,
     side: null,
-    turn: null
+    turn: null,
+    winner: null,
+    draw: null
 }
 
 export const gameSlice = createSlice({
@@ -21,7 +23,20 @@ export const gameSlice = createSlice({
         },
         setMove: (state, action) => {
             state.move = action.payload
+        },
+        setWinner: (state, action) => {
+            state.winner = action.payload
+        },
+        setDraw: (state, action) => {
+            state.draw = action.payload
+        },
+        setClearGame: (state, action) => {
+            state.status = null
+            state.side = null
+            state.turn = null
+            state.winner = null
+            state.draw = null
         }
     }
 })
-export const {gameStatus, gameTurn, setMove, setSide} = gameSlice.actions
+export const {gameStatus, gameTurn, setMove, setSide, setWinner, setClearGame, setDraw} = gameSlice.actions

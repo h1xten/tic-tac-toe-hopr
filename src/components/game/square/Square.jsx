@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-const Square = ({value, handleClick, index}) => {
+const Square = ({ value, handleClick, index }) => {
   return (
-    <button className='square' onClick={()=>handleClick(index)}>
-        {value}
+    <button className='square' onClick={() => handleClick(index)}>
+      {value}
     </button>
-  )
-}
+  );
+};
 
-export default Square
+export default Square;
