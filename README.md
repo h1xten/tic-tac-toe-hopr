@@ -10,7 +10,7 @@ Developed with
 
 ## Game
 The game requires 2 participants (2 nodes).<br/>
-The player must set the node settings (Node API Endpoint, WS Endpoint, Security Token).<br/>
+The player must set the node settings (Node API Endpoint, Security Token).<br/>
 The player can create a game or join an existing one by specifying the opponent's address.<br/>
 The side for which you will play (X or O) is chosen randomly. When both players connect, they are given a randomly generated number. The player whose number is greater than the opponent's number goes first (side X).<br/>
 When a player makes a move, a message with his move (his side and cell index) is sent to the opponent.
