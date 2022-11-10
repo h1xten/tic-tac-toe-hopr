@@ -17,13 +17,7 @@ import { calculateWinner } from '../../../utils/calculateWinner';
 import Square from '../square/Square';
 import { getRandom } from '../../../utils/getRandom';
 
-const Board = ({
-  gameMove,
-  nodeApi,
-  recipient,
-  setWinner,
-  hoprAddress,
-}) => {
+const Board = ({ gameMove, nodeApi, recipient, setWinner, hoprAddress }) => {
   const dispatch = useDispatch();
 
   const whichTurn = useSelector((state) => state?.game?.turn);
@@ -50,7 +44,7 @@ const Board = ({
         recipient,
         body: `draw-${999}-${hoprAddress}`,
       });
-      dispatch(setDraw(true))
+      dispatch(setDraw(true));
     }
   }, [whichTurn, winner]);
 

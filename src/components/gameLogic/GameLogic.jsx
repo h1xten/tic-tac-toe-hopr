@@ -5,7 +5,7 @@ import {
   gameTurn,
   setClearGame,
   setSide,
-  setDraw
+  setDraw,
 } from '../../store/gameSlice/gameSlice';
 import {
   setClearPeer,
@@ -27,7 +27,7 @@ const GameLogic = ({ nodeApi, messages, hoprAddress }) => {
   const recipient = useSelector((state) => state?.peer?.opponent?.address);
   const mySide = useSelector((state) => state?.game?.side);
   const winner = useSelector((state) => state?.game?.winner);
-  const draw = useSelector(state => state.game?.draw)
+  const draw = useSelector((state) => state.game?.draw);
 
   let gameMove = {};
 
@@ -50,15 +50,15 @@ const GameLogic = ({ nodeApi, messages, hoprAddress }) => {
     dispatch(setClearGame());
     dispatch(setClearPeer());
   }
-  if(lastMessage[0]?.move === 'draw') {
-    dispatch(setDraw(true))
+  if (lastMessage[0]?.move === 'draw') {
+    dispatch(setDraw(true));
   }
 
   if (
     (myStatus === 'invite' && lastMessage[0]?.move === 'connected') ||
     (myStatus === 'connected' && lastMessage[0]?.move === 'invite')
   ) {
-    dispatch(setDraw(null))
+    dispatch(setDraw(null));
     dispatch(setOpponentNumber(lastMessage[0]?.msg));
     dispatch(setOpponent(lastMessage[0]?.sender));
     if (Number(myNumber) >= Number(lastMessage[0]?.msg)) {

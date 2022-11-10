@@ -49,8 +49,8 @@ const Header = ({
   };
 
   const handleClear = () => {
-    dispatch(setClearPeer())
-    dispatch(setClearGame())
+    dispatch(setClearPeer());
+    dispatch(setClearGame());
     setClear(true);
     dispatch(setSecurityToken(''));
     dispatch(setOpponent(''));
@@ -62,8 +62,8 @@ const Header = ({
   const [sendMessage] = useSendMessageMutation();
 
   const handleSendMessage = () => {
-    dispatch(setClearPeer())
-    dispatch(setClearGame())
+    dispatch(setClearPeer());
+    dispatch(setClearGame());
     const randNumber = getRandom(1500);
     sendMessage({
       nodeApi,
