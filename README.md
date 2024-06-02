@@ -17,7 +17,6 @@ When a player makes a move, a message with his move (his side and cell index) is
 
 ## Usage
 - [Demo App Site](https://tic-tac-toe-hopr.vercel.app/)
-- [Demo (Video)](https://youtu.be/jlJUXKiBmXU)
 
 ## Contacts
 - [Telegram](https://t.me/h1xten)
